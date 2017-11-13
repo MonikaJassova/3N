@@ -1,0 +1,69 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<title>Uloha 1</title>
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="uloha1.js"></script>
+		<link rel="stylesheet" type="text/css" href="uloha1.css">
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>Meno:</td>
+				<td><input type="text" name="meno" id="meno">
+					<div id="errorm" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Priezvisko:</td>
+				<td><input type="text" name="priezvisko" id="priezvisko">
+					<div id="errorp" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Dátum narodenia:</td>
+				<td><input type="date" name="dn" id="dn" title="Max. dnešný dátum">
+					<div id="errordn" class="error"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Pohlavie:</td>
+				<td><input type="radio" name="pohlavie" value="m" id="m" checked><label for="m"> Muž</label><br>
+					<input type="radio" name="pohlavie" value="z" id="z"><label for="z"> Žena</label></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><button id="add" onclick="validacia()">PRIDAŤ</button></td>
+			</tr>
+		</table>
+		<p id="error"></p>
+		<div class="menu">Filtrovať podľa pohlavia:
+			  <select id="mpohlavie" onchange="filtruj()">
+					<option value="mmz" selected>Muži + ženy</option>
+					<option value="mm">Muži</option>
+					<option value="mz">Ženy</option>
+			  </select>
+			  <input type="checkbox" id="showAge" onchange="ukazVek(this)">Ukázať vek
+		</div>
+		<table id="output">
+			<thead>
+				<tr>
+					<th>Meno</th>
+					<th>Priezvisko</th>
+					<th>Dátum narodenia/Vek</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+		<div id="storage">
+			<button id="save" onclick="save()">ULOŽIŤ</button>
+			<button id="load" onclick="load()">NAČÍTAŤ</button>
+		</div>
+		<br><br><br>
+		<div id="text">Text bla bla bla...</div>
+		<button id="blue" class="blue">Blue</button>
+		<button id="red" class="red">Red</button>
+	</body>
+</html> 

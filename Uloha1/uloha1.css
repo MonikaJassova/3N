@@ -1,0 +1,55 @@
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    text-transform: capitalize;
+}
+
+div {
+    padding-top: 5px;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+#storage {
+    margin-top: 10px;
+}
+
+#output {
+    display: none;
+    width: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+/*thead{
+    display: table-header-group;
+}*/
+
+table#output th, table#output td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#output tr:nth-child(even) {
+    background-color: #eee;
+}
+table#output tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#output th {
+    background-color: black;
+    color: white;
+}

@@ -1,0 +1,44 @@
+HTML5, jQuery, css, js, html fily
+
+formular:
+meno required aspon 2 chars aj trim, automaticky format prve velke, cervenou farbou chyb. hlaska pod zlym polom
+priezvisko required aspon 2 chars aj trim, format prve velke
+dat. nar. nesmie byt in future input type date
+pohlavie radio
+submit button
+
+neviditelna tabulka (zobrazi sa po prvom pridani) s checkboxom vek a radio m/z/vsetci (default) (zobrazi len muzov alebo len zeny), ak nie su muzi, tak ziadna tabulka
+data ulozit v premennej typu pole
+meno priezv. DN/vek (podla checkboxu)
+DN stlpec sortovatelny
+4. stlpec bez nazvu s ikonkami krizika na delete
+paging
+
+do dalsej hodiny validacia, vytvorenie objektu a jeho poslanie fcii, kt. ho zapise do tab.
+
+xml - ako html dokument, na ulozenie dat (na disku, v DB) a prenos dat (po sieti medzi serverom a klientom) v strukturovanom formate
+    - citatelnejsi ludom
+json - rychlejsi, vacsinou na webe, da sa priamo konvertovat na js object
+	 - textovy subor, dvojice kluc:hodnota
+		v js: var person1 = {"name":"Jan",
+							"age":23};
+			var objektp = JSON.parse(person1);
+			vznikne objekt objektp ako {name:"Jan",
+										age:23}}
+			pristup k properties cez bodku
+			v js: getElementById("message").innerHTML = objektp.name;
+			v jQuery: $(#message).html = objektp.name;
+			
+		opacne (poslat JSON): vytiahneme hodnoty, vytvorime objekt, zmenime na JSON a posleme
+			var meno = $(#meno).val();
+			var mesto = $(#mesto).val();
+			var obj = {};
+			obj["meno"]=meno;
+			obj["mesto"]=mesto;
+			var data = JSON.stringify(obj);
+					   
+
+server pre pocasie
+
+ajax: asynchronny js, server posle len zmenene data (stranka sa nacita plne len 1.x)
+3x vytlacena ZP, do konca marca
