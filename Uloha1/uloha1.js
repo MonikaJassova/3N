@@ -12,10 +12,12 @@ function pridat() {
     obj["priezvisko"]=priezvisko;
     obj["dn"]=dn;
     obj["muz"]=pohl;
+    obj["id"] = persons.length+1;
     i=persons.push(obj);
     $("#output").show();
     $('#output tr:last').after('<tr><td>'+obj.meno+'</td><td>'+obj.priezvisko+'</td><td>'+obj.dn+'</td><td></td></tr>');
     console.log("dlzka pola: "+i);
+    console.log("id = "+obj.id);
 }
 
 function validacia() {
@@ -81,18 +83,23 @@ function save(){
 
 function load(){
     if (typeof(Storage) !== "undefined") {
-        persons = JSON.parse(localStorage["persons"]);
-        $("#output").show();
-        console.log("Persons: "+persons.length);
-        console.log(persons);
-        $('#output tbody').empty();
-        var pLen = persons.length;
-        for (i=0; i<pLen; i++){
-            console.log(persons[i]);
-            $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
-            $('#output tbody').on('click', '#del'+i, function(){
-                alert(this.id);
-            });
+        if (localStorage.getItem("persons") === null){
+
+        }
+        else {
+            persons = JSON.parse(localStorage["persons"]);
+            $("#output").show();
+            console.log("Persons: "+persons.length);
+            console.log(persons);
+            $('#output tbody').empty();
+            var pLen = persons.length;
+            for (i=0; i<pLen; i++){
+                console.log(persons[i]);
+                $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
+                $('#output tbody').on('click', '#del'+i, function(){
+                    alert(this.id);
+                });
+            }
         }
     } else {
         document.getElementById("error").innerHTML = "Sorry, your browser does not support Web Storage...";

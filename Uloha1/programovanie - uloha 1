@@ -12,7 +12,8 @@ data ulozit v premennej typu pole
 meno priezv. DN/vek (podla checkboxu)
 DN stlpec sortovatelny
 4. stlpec bez nazvu s ikonkami krizika na delete
-paging
+paging (10 riadkov)
+3. button Graf: pod to na canvas JS vykreslit vek (ciarovy graf) (sirka 600px, vediet mriezku prisposobit podla poctu zaznamov), kolacovy podiel pohlavi
 
 do dalsej hodiny validacia, vytvorenie objektu a jeho poslanie fcii, kt. ho zapise do tab.
 
@@ -42,3 +43,15 @@ server pre pocasie
 
 ajax: asynchronny js, server posle len zmenene data (stranka sa nacita plne len 1.x)
 3x vytlacena ZP, do konca marca
+
+uloha c. 2: (hodi sa postman)
+Country dropdown (cez API zoznam krajin)
+po vybere novy dropdown sa zobrazi City s mestami v Nemecku (niekolko desiatok z API)
+po vybere mesta vypis suradnic Latitude a Longitude
+checkbox policka zajtra, pozajtra (+ pocasie na dnes defaultne)
+  
+
+zaverecna skuska (koncom maja):
+- 30 otazok (zaklad 1. rocnik - Java 15 otazok, 5 otazok vseob. informatika, 10 otazok web) do konca januara
+
+4.12. nie je hodina
