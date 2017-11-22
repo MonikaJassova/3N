@@ -11,6 +11,10 @@ div {
     padding-top: 5px;
 }
 
+.hidden {
+    display: none;
+}
+
 .red {
     color: red;
 }

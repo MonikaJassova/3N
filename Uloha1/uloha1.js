@@ -5,6 +5,8 @@ var pohl;
 var persons = [];
 var data;
 var i;
+var isFiltered = false;
+var pFiltered;
 
 function pridat() {
     var obj = {};
@@ -12,12 +14,22 @@ function pridat() {
     obj["priezvisko"]=priezvisko;
     obj["dn"]=dn;
     obj["muz"]=pohl;
-    obj["id"] = persons.length+1;
+    obj["id"]=persons.length+1;
+    var dob = new Date(dn);
+    var today = new Date();
+    if (today.getMonth() > dob.getMonth() || (today.getMonth() == dob.getMonth()) && today.getDate() >= dob.getDate()){
+        var age = today.getFullYear() - dob.getFullYear();
+    }
+    else {
+        var age = (today.getFullYear() - dob.getFullYear()) - 1;
+    }
+    obj["vek"]=age;
     i=persons.push(obj);
     $("#output").show();
-    $('#output tr:last').after('<tr><td>'+obj.meno+'</td><td>'+obj.priezvisko+'</td><td>'+obj.dn+'</td><td></td></tr>');
+    $('#output tr:last').after('<tr><td>'+obj.meno+'</td><td>'+obj.priezvisko+'</td><td>'+obj.dn+'</td><td class="hidden">'+obj.vek+'</td><td></td></tr>');
     console.log("dlzka pola: "+i);
     console.log("id = "+obj.id);
+    console.log("vek = "+obj.vek);
 }
 
 function validacia() {
@@ -95,7 +107,7 @@ function load(){
             var pLen = persons.length;
             for (i=0; i<pLen; i++){
                 console.log(persons[i]);
-                $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
+                $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td class="hidden">'+persons[i].vek+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
                 $('#output tbody').on('click', '#del'+i, function(){
                     alert(this.id);
                 });
@@ -109,7 +121,7 @@ function load(){
 function filtruj(){
     var filter = document.getElementById("mpohlavie").value;
     var pLen = persons.length;
-    var pFiltered = [];
+    pFiltered = [];
     switch (filter){
         case "mm":
             for (var j=0; j<pLen; j++){
@@ -117,6 +129,7 @@ function filtruj(){
                     pFiltered.push(persons[j]);
                 }
             }
+            isFiltered = true;
             break;
         case "mz":
             for (var j=0; j<pLen; j++){
@@ -124,10 +137,12 @@ function filtruj(){
                     pFiltered.push(persons[j]);
                 }
             }
+            isFiltered = true;
             break;
         case "mmz":
             console.log("muzi+zeny");
             pFiltered = persons.slice(0);
+            isFiltered = false;
             break;
     }
     var age = document.getElementById("showAge").checked;
@@ -139,9 +154,7 @@ function prepisTabulku(pole, vek){
     if (vek){
         for (var j=0; j<pole.length; j++){
             console.log(j, pole[j].length, pole[j]);
-            var pVek = pole[j].dn;
-            console.log(pVek);
-            $('#output tbody').append('<tr><td>'+pole[j].meno+'</td><td>'+pole[j].priezvisko+'</td><td>'+pole[j].dn+'</td><td><img src="delete.png" height="20" id="del'+j+'"></td></tr>');
+            $('#output tbody').append('<tr><td>'+pole[j].meno+'</td><td>'+pole[j].priezvisko+'</td><td>'+pole[j].vek+'</td><td><img src="delete.png" height="20" id="del'+j+'"></td></tr>');
             $('#output tbody').on('click', '#del'+i, function(){
                 alert(this.id);
             });
@@ -161,11 +174,11 @@ function prepisTabulku(pole, vek){
 function ukazVek(checkbox){
     if (checkbox.checked){
         console.log('vek');
-        prepisTabulku(pFiltered, checkbox.checked);
+        prepisTabulku(isFiltered ? pFiltered : persons, checkbox.checked);
     }
     else {
         console.log('datum');
-        prepisTabulku(pFiltered, checkbox.checked);
+        prepisTabulku(isFiltered ? pFiltered : persons, checkbox.checked);
     }
 }
 
