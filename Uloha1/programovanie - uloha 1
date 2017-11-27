@@ -6,16 +6,14 @@ priezvisko required aspon 2 chars aj trim, format prve velke
 dat. nar. nesmie byt in future input type date
 pohlavie radio
 submit button
-
 neviditelna tabulka (zobrazi sa po prvom pridani) s checkboxom vek a radio m/z/vsetci (default) (zobrazi len muzov alebo len zeny), ak nie su muzi, tak ziadna tabulka
 data ulozit v premennej typu pole
 meno priezv. DN/vek (podla checkboxu)
+
 DN stlpec sortovatelny
 4. stlpec bez nazvu s ikonkami krizika na delete
 paging (10 riadkov)
 3. button Graf: pod to na canvas JS vykreslit vek (ciarovy graf) (sirka 600px, vediet mriezku prisposobit podla poctu zaznamov), kolacovy podiel pohlavi
-
-do dalsej hodiny validacia, vytvorenie objektu a jeho poslanie fcii, kt. ho zapise do tab.
 
 xml - ako html dokument, na ulozenie dat (na disku, v DB) a prenos dat (po sieti medzi serverom a klientom) v strukturovanom formate
     - citatelnejsi ludom

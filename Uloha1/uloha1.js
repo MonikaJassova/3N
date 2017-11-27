@@ -7,6 +7,8 @@ var data;
 var i;
 var isFiltered = false;
 var pFiltered;
+const canvasWidth = 800;
+const canvasHeight = 400;
 
 function pridat() {
     var obj = {};
@@ -26,10 +28,8 @@ function pridat() {
     obj["vek"]=age;
     i=persons.push(obj);
     $("#output").show();
-    $('#output tr:last').after('<tr><td>'+obj.meno+'</td><td>'+obj.priezvisko+'</td><td>'+obj.dn+'</td><td class="hidden">'+obj.vek+'</td><td></td></tr>');
-    console.log("dlzka pola: "+i);
+    $('#output tr:last').after('<tr><td>'+obj.meno+'</td><td>'+obj.priezvisko+'</td><td>'+obj.dn+'</td><td></td></tr>');
     console.log("id = "+obj.id);
-    console.log("vek = "+obj.vek);
 }
 
 function validacia() {
@@ -106,8 +106,7 @@ function load(){
             $('#output tbody').empty();
             var pLen = persons.length;
             for (i=0; i<pLen; i++){
-                console.log(persons[i]);
-                $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td class="hidden">'+persons[i].vek+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
+                $('#output tbody').append('<tr><td>'+persons[i].meno+'</td><td>'+persons[i].priezvisko+'</td><td>'+persons[i].dn+'</td><td><img src="delete.png" height="20" id="del'+i+'"></td></tr>');
                 $('#output tbody').on('click', '#del'+i, function(){
                     alert(this.id);
                 });
@@ -140,7 +139,6 @@ function filtruj(){
             isFiltered = true;
             break;
         case "mmz":
-            console.log("muzi+zeny");
             pFiltered = persons.slice(0);
             isFiltered = false;
             break;
@@ -153,7 +151,6 @@ function prepisTabulku(pole, vek){
     $('#output tbody').empty();
     if (vek){
         for (var j=0; j<pole.length; j++){
-            console.log(j, pole[j].length, pole[j]);
             $('#output tbody').append('<tr><td>'+pole[j].meno+'</td><td>'+pole[j].priezvisko+'</td><td>'+pole[j].vek+'</td><td><img src="delete.png" height="20" id="del'+j+'"></td></tr>');
             $('#output tbody').on('click', '#del'+i, function(){
                 alert(this.id);
@@ -162,7 +159,6 @@ function prepisTabulku(pole, vek){
     }
     else{
         for (var j=0; j<pole.length; j++){
-            console.log(j, pole[j].length, pole[j]);
             $('#output tbody').append('<tr><td>'+pole[j].meno+'</td><td>'+pole[j].priezvisko+'</td><td>'+pole[j].dn+'</td><td><img src="delete.png" height="20" id="del'+j+'"></td></tr>');
             $('#output tbody').on('click', '#del'+i, function(){
                 alert(this.id);
@@ -172,14 +168,104 @@ function prepisTabulku(pole, vek){
 }
 
 function ukazVek(checkbox){
-    if (checkbox.checked){
-        console.log('vek');
-        prepisTabulku(isFiltered ? pFiltered : persons, checkbox.checked);
+    prepisTabulku(isFiltered ? pFiltered : persons, checkbox.checked);
+}
+
+function sortTable(){
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("output");
+    switching = true;
+    dir = "asc";
+    
+    // table.getElementsByTagName("TH")[2].classList.remove("headerSortDown");
+    // table.getElementsByTagName("TH")[2].classList.add("headerSortUp");
+
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+          one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[2];
+          y = rows[i + 1].getElementsByTagName("TD")[2];
+          /* Check if the two rows should switch place,
+          based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+          and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount ++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            // table.getElementsByTagName("TH")[2].classList.remove("headerSortUp");
+            // table.getElementsByTagName("TH")[2].classList.add("headerSortDown");
+            switching = true;
+          }
+        }
+      }
+}
+
+function graph(){
+    var c = document.getElementById("canvas");
+    document.getElementsByClassName("graf")[0].style.display = "block";
+    //c.style.display = "block";
+    var ctx = c.getContext("2d");
+
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    //vykreslit hodnoty
+    ctx.beginPath();
+    ctx.moveTo(0,canvasHeight);
+    ctx.strokeStyle="black";
+
+    var pLen = persons.length;
+    var dx = canvasWidth/(pLen+1);
+    for (var j=0, x=dx; j<pLen; j++, x+=dx) {
+        var y = canvasHeight-((persons[j].vek/100)*canvasHeight);
+        ctx.lineTo(x,y);
+        ctx.stroke();
     }
-    else {
-        console.log('datum');
-        prepisTabulku(isFiltered ? pFiltered : persons, checkbox.checked);
+
+    //vykreslit priemer
+    document.getElementById("priemer").innerHTML="Priemerný vek = "+priemernyVek(persons);
+    var priemer = (priemernyVek(persons)/100)*canvasHeight;
+    ctx.beginPath();
+    ctx.moveTo(0,canvasHeight-priemer);
+    ctx.lineTo(canvasWidth,canvasHeight-priemer);
+    ctx.strokeStyle="red";
+    ctx.stroke(); 
+}
+
+function priemernyVek(pole){
+    var pLen = pole.length;
+    var suma = 0;
+    for (var j=0; j<pLen; j++){
+        suma+=pole[j].vek;
     }
+    return Math.floor(suma/pLen);
 }
 
 $(document).ready(function(){

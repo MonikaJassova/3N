@@ -51,7 +51,7 @@
 				<tr>
 					<th>Meno</th>
 					<th>Priezvisko</th>
-					<th>Dátum narodenia/Vek</th>
+					<th onclick="sortTable()">Dátum narodenia/Vek</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -60,6 +60,11 @@
 		<div id="storage">
 			<button id="save" onclick="save()">ULOŽIŤ</button>
 			<button id="load" onclick="load()">NAČÍTAŤ</button>
+			<button id="graph" onclick="graph()">GRAF</button>
+		</div>
+		<div class="graf">
+			<canvas id="canvas" width="800" height="400" style="border:1px solid #000000;"></canvas> 
+			<p id="priemer"></p>
 		</div>
 		<br><br><br>
 		<div id="text">Text bla bla bla...</div>
