@@ -1,0 +1,31 @@
+akademiasovysk.ddns.net port 5322
+
+jassovam
+sovy3n
+
+linux server
+po prihlaseni domovsky adresar korenovy - root /
+priecinok je v linuxe povazovany za subor
+subory nemusia mat priponu
+/home/jassovam/
+
+prikazy
+kde som? pwd
+zoznam suborov v priecinku ls
+. aktualny priecinok
+.. parent (o 1 vyssi priecinok)
+zmenit priecinok cd (cd..  cd nazov foldera, cd ciste hodi do domovskeho)
+prepinace: -al (doplnky prikazu)
+-l long vypis: citacie prava (d-directory, -subor, *odkaz prve 3 moje prava na r - read, w - write, x - execute, dalsie 3 su prava uzivatelov v skupine) meno vlastnika meno skupiny velkost v B datum poslednej zmeny nazov
+-a vypise skryte subory (zacinaju .)
+
+vim nazov suboru vytvori novy subor
+i insert mod
+esc vyjde z insert modu
+:wq zapise a ukonci
+cat nazov suboru vypise obsah suboru na obrazovku
+who kto je prihlaseny
+mkdir vytvori priecinok
+rm nazov suboru (prazdneho foldera) vymaze
+man prikaz help k prikazu
+
