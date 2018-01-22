@@ -1,10 +1,13 @@
-akademiasovysk.ddns.net port 5322
+akademiasovy.ddns.net port 5322
 
 jassovam
 sovy3n
 
 linux server
-po prihlaseni domovsky adresar korenovy - root /
+po prihlaseni domovsky adresar (home)
+cd / do root korenoveho adresara
+cd do home
+cd .. o 1 uroven vyssie
 priecinok je v linuxe povazovany za subor
 subory nemusia mat priponu
 /home/jassovam/
@@ -27,5 +30,8 @@ cat nazov suboru vypise obsah suboru na obrazovku
 who kto je prihlaseny
 mkdir vytvori priecinok
 rm nazov suboru (prazdneho foldera) vymaze
+rm -r zmaze neprazdny folder so subormi v nom
 man prikaz help k prikazu
+
+cd / TAB ponukne moznosti
 
